@@ -9,7 +9,7 @@ function App() {
   useEffect(() => {
     api.get('/repositories')
       .then(response => setRepositories(response.data))
-  }, [])
+  }, [repositories])
 
   async function handleAddRepository() {
     const response = await api.post('repositories', {
@@ -34,7 +34,7 @@ function App() {
       <ul data-testid="repository-list">
         {repositories.map((repository) => (
           <li key={repository.id}>
-            {repository.title}
+            <a href={repository.url} target="_blank">{repository.title}</a>
 
             <button onClick={() => handleRemoveRepository(repository.id)}>
               Remover
